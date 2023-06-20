@@ -87,12 +87,12 @@ class ApiMenu {
         }
     }
 
-     function insertarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled) {
+    public function insertarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled) {
         $menu = new Menu(); // Crear una instancia de la clase Menu
-    
+
         // Realizar la inserción en la base de datos
         $query = $menu->connect()->prepare('INSERT INTO menu (IdMenu, NameMenu, IdCatalogoMenu, CreatedAt, UpdatedAt, Enabled) VALUES (:IdMenu, :NameMenu, :IdCatalogoMenu, :CreatedAt, :UpdatedAt, :Enabled)');
-        $query->execute([
+        $result = $query->execute([
             'IdMenu' => $IdMenu,
             'NameMenu' => $NameMenu,
             'IdCatalogoMenu' => $IdCatalogoMenu,
@@ -100,9 +100,26 @@ class ApiMenu {
             'UpdatedAt' => $UpdatedAt,
             'Enabled' => $Enabled
         ]);
-    
+
         // Verificar si la inserción fue exitosa
-        if ($query) {
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    function editarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled) {
+        $menu = new Menu(); // Crear una instancia de la clase Menu
+
+        $Enabled = intval($Enabled);
+    
+        // Realizar la actualización en la base de datos
+        $result = $menu->editarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled);
+    
+        // Verificar si la actualización fue exitosa
+        if ($result) {
             return true;
         } else {
             return false;

@@ -20,7 +20,7 @@ class Menu extends db
         return $query;
     }
 
-    function insertarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled) {
+    function insertarMenuBd($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled) {
         $query = $this->connect()->prepare('INSERT INTO menu (IdMenu, NameMenu, IdCatalogoMenu, CreatedAt, UpdatedAt, Enabled) VALUES (:IdMenu, :NameMenu, :IdCatalogoMenu, :CreatedAt, :UpdatedAt, :Enabled)');
         $query->execute([
             'IdMenu' => $IdMenu,
@@ -31,6 +31,25 @@ class Menu extends db
             'Enabled' => $Enabled
         ]);
         return $query;
+    }
+
+    function editarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled) {
+        $query = $this->connect()->prepare('UPDATE menu SET NameMenu = :NameMenu, IdCatalogoMenu = :IdCatalogoMenu, CreatedAt = :CreatedAt, UpdatedAt = :UpdatedAt, Enabled = :Enabled WHERE IdMenu = :IdMenu');
+        $result = $query->execute([
+            'IdMenu' => $IdMenu,
+            'NameMenu' => $NameMenu,
+            'IdCatalogoMenu' => $IdCatalogoMenu,
+            'CreatedAt' => $CreatedAt,
+            'UpdatedAt' => $UpdatedAt,
+            'Enabled' => $Enabled
+        ]);
+        
+        // Verificar si la actualización fue exitosa
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
