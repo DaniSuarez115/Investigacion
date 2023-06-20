@@ -20,7 +20,7 @@ class ApiRoles {
                 $item = array(
                     'IdRol' => $row['IdRol'],
                     'NameRol' => $row['NameRol'],
-                    'IdMenu' => $row['IdMenu'],
+                    'IdRol' => $row['IdRol'],
                     'CreatedAt' => $row['CreatedAt'],
                     'UpdatedAt' => $row['UpdatedAt'],
                     'Enabled' => $row['Enabled']
@@ -35,8 +35,8 @@ class ApiRoles {
         }
     }
     function getById($IdRol) {
-        $roles = new Roles(); // Crear una instancia de la clase Menu
-        $roles = array(); // Cambiar el nombre de la variable para evitar sobrescribir la instancia
+        $roles = new Roles(); // Crear una instancia de la clase roles
+        $rolItems = array(); // Cambiar el nombre de la variable para evitar sobrescribir la instancia
     
         $res = $roles->obtenerRol($IdRol);
     
@@ -46,13 +46,13 @@ class ApiRoles {
             $item = array(
                 'IdRol' => $row['IdRol'],
                 'NameRol' => $row['NameRol'],
-                'IdMenu' => $row['IdMenu'],
+                'IdRol' => $row['IdRol'],
                 'CreatedAt' => $row['CreatedAt'],
                 'UpdatedAt' => $row['UpdatedAt'],
                 'Enabled' => $row['Enabled']
             );
-            array_push($rolesItems, $item); // Usar la variable $menuItems en lugar de $menu
-            $this->printJSON($rolesItems);
+            array_push($rolItems, $item); // Usar la variable $roltems en lugar de $rol
+            $this->printJSON($rolItems);
         } else {
             $this->error('No hay elementos');
         }

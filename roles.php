@@ -11,7 +11,7 @@ class Roles extends db
     }
 
     function obtenerRol($IdRol){
-        $query = $this->connect()->prepare('SELECT * FROM menu WHERE IdRol = :IdRol');
+        $query = $this->connect()->prepare('SELECT * FROM roles WHERE IdRol = :IdRol');
         $query->execute(['IdRol' => $IdRol]);
         return $query;
     }
