@@ -11,7 +11,7 @@ class db {
 		$this->host     = 'localhost';
         $this->db       = 'api';
         $this->user     = 'root';
-        $this->password = "123";
+        $this->password = "";
         $this->charset  = 'utf8mb4';
 	}
 

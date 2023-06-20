@@ -1,23 +1,22 @@
 <?php
-// include_once 'apimenu.php';
-include_once 'menu.php';
-
-class ApiMenu {
+// include_once 'apiauditoria.php';
+include_once 'auditoria.php';
+class Apiauditoria {
     function getAll() {
-        $menu = new Menu();
+        $auditoria = new auditoria();
         $response = array();
         $response["items"] = array();
-        $respuesta = $menu->getMenu();
+        $respuesta = $auditoria->getAuditoria();
 
         if ($respuesta->rowCount()) {
             while ($row = $respuesta->fetch(PDO::FETCH_ASSOC)) {
                 $item = array(
+                    'IdAuditoria' => $row['IdAuditoria'],
+                    'Sentencia' => $row['Sentencia'],
+                    'Controller' => $row['Controller'],
                     'IdMenu' => $row['IdMenu'],
-                    'NameMenu' => $row['NameMenu'],
-                    'IdCatalogoMenu' => $row['IdCatalogoMenu'],
-                    'CreatedAt' => $row['CreatedAt'],
-                    'UpdatedAt' => $row['UpdatedAt'],
-                    'Enabled' => $row['Enabled']
+                    'IdUser' => $row['IdUser'],
+                    'CreateDate' => $row['CreateDate']
                 );
                 array_push($response['items'], $item);
             }
@@ -29,25 +28,25 @@ class ApiMenu {
         }
     }
 
-    function getById($IdMenu) {
-        $menu = new Menu(); // Crear una instancia de la clase Menu
-        $menuItems = array(); // Cambiar el nombre de la variable para evitar sobrescribir la instancia
+    function getById($IdAuditoria) {
+        $auditoria = new Auditoria(); // Crear una instancia de la clase auditoria
+        $auditoriaItems = array(); // Cambiar el nombre de la variable para evitar sobrescribir la instancia
     
-        $res = $menu->obtenerMenu($IdMenu);
+        $res = $auditoria->obtenerAuditoria($IdAuditoria);
     
         if ($res->rowCount() == 1) {
             $row = $res->fetch();
         
             $item = array(
+                'IdAuditoria' => $row['IdAuditoria'],
+                'Sentencia' => $row['Sentencia'],
+                'Controller' => $row['Controller'],
                 'IdMenu' => $row['IdMenu'],
-                'NameMenu' => $row['NameMenu'],
-                'IdCatalogoMenu' => $row['IdCatalogoMenu'],
-                'CreatedAt' => $row['CreatedAt'],
-                'UpdatedAt' => $row['UpdatedAt'],
-                'Enabled' => $row['Enabled']
+                'IdUser' => $row['IdUser'],
+                'createDate' => $row['createDate']
             );
-            array_push($menuItems, $item); // Usar la variable $menuItems en lugar de $menu
-            $this->printJSON($menuItems);
+            array_push($auditoriaItems, $item); // Usar la variable $auditoriaItems en lugar de $auditoria
+            $this->printJSON($auditoriaItems);
         } else {
             $this->error('No hay elementos');
         }

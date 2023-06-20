@@ -1,26 +1,18 @@
 <?php
-include_once 'apiroles.php';
-include_once 'roles.php';
-
-// // Crear una instancia de ApiRoles
-// $apiRoles = new ApiRoles();
-
-// // Llamar al método getAll() para obtener los datos
-// $apiRoles->getAll();
-
-class ApiRoles {
+// include_once 'apicontroller.php';
+include_once 'controller.php';
+class Apicontroller {
     function getAll() {
-        $roles = new Roles();
+        $controller = new Controller();
         $response = array();
         $response["items"] = array();
-        $respuesta = $roles->getRoles();
+        $respuesta = $controller->getController();
 
         if ($respuesta->rowCount()) {
             while ($row = $respuesta->fetch(PDO::FETCH_ASSOC)) {
                 $item = array(
-                    'IdRol' => $row['IdRol'],
-                    'NameRol' => $row['NameRol'],
-                    'IdRol' => $row['IdRol'],
+                    'IdController' => $row['IdController'],
+                    'NameControllerView' => $row['NameControllerView'],
                     'CreatedAt' => $row['CreatedAt'],
                     'UpdatedAt' => $row['UpdatedAt'],
                     'Enabled' => $row['Enabled']
@@ -34,25 +26,25 @@ class ApiRoles {
             echo json_encode(array('mensaje' => 'No hay elementos'));
         }
     }
-    function getById($IdRol) {
-        $rol = new Roles(); // Crear una instancia de la clase roles
-        $roltems = array(); // Cambiar el nombre de la variable para evitar sobrescribir la instancia
+
+    function getById($Idcontroller) {
+        $controller = new Controller(); // Crear una instancia de la clase controller
+        $controllerItems = array(); // Cambiar el nombre de la variable para evitar sobrescribir la instancia
     
-        $res = $rol->obtenerRol($IdRol);
+        $res = $controller->obtenerController($Idcontroller);
     
         if ($res->rowCount() == 1) {
             $row = $res->fetch();
         
             $item = array(
-                'IdRol' => $row['IdRol'],
-                'NameRol' => $row['NameRol'],
-                'IdRol' => $row['IdRol'],
+                'IdController' => $row['IdController'],
+                'NameControllerView' => $row['NameControllerView'],
                 'CreatedAt' => $row['CreatedAt'],
                 'UpdatedAt' => $row['UpdatedAt'],
                 'Enabled' => $row['Enabled']
             );
-            array_push($roltems, $item); // Usar la variable $roltems en lugar de $rol
-            $this->printJSON($roltems);
+            array_push($controllerItems, $item); // Usar la variable $controllerItems en lugar de $controller
+            $this->printJSON($controllerItems);
         } else {
             $this->error('No hay elementos');
         }
@@ -70,4 +62,3 @@ class ApiRoles {
     }
 }
 ?>
-

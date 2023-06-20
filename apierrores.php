@@ -1,29 +1,22 @@
 <?php
-include_once 'apiroles.php';
-include_once 'roles.php';
+// include_once 'apierror.php';
+include_once 'errores.php';
 
-// // Crear una instancia de ApiRoles
-// $apiRoles = new ApiRoles();
-
-// // Llamar al método getAll() para obtener los datos
-// $apiRoles->getAll();
-
-class ApiRoles {
+class ApiErrores {
     function getAll() {
-        $roles = new Roles();
+        $error = new Errores();
         $response = array();
         $response["items"] = array();
-        $respuesta = $roles->getRoles();
+        $respuesta = $error->getErrores();
 
         if ($respuesta->rowCount()) {
             while ($row = $respuesta->fetch(PDO::FETCH_ASSOC)) {
                 $item = array(
-                    'IdRol' => $row['IdRol'],
-                    'NameRol' => $row['NameRol'],
-                    'IdRol' => $row['IdRol'],
+                    'IdErrores' => $row['IdErrores'],
+                    'Sentencia' => $row['Sentencia'],
+                    'Controller' => $row['Controller'],
                     'CreatedAt' => $row['CreatedAt'],
-                    'UpdatedAt' => $row['UpdatedAt'],
-                    'Enabled' => $row['Enabled']
+                    'IdUser' => $row['IdUser']
                 );
                 array_push($response['items'], $item);
             }
@@ -34,25 +27,26 @@ class ApiRoles {
             echo json_encode(array('mensaje' => 'No hay elementos'));
         }
     }
-    function getById($IdRol) {
-        $rol = new Roles(); // Crear una instancia de la clase roles
-        $roltems = array(); // Cambiar el nombre de la variable para evitar sobrescribir la instancia
+
+    function getById($Iderror) {
+        $error = new error(); // Crear una instancia de la clase error
+        $errorItems = array(); // Cambiar el nombre de la variable para evitar sobrescribir la instancia
     
-        $res = $rol->obtenerRol($IdRol);
+        $res = $error->obtenererror($Iderror);
     
         if ($res->rowCount() == 1) {
             $row = $res->fetch();
         
             $item = array(
-                'IdRol' => $row['IdRol'],
-                'NameRol' => $row['NameRol'],
-                'IdRol' => $row['IdRol'],
+                'Iderror' => $row['Iderror'],
+                'Nameerror' => $row['Nameerror'],
+                'IdCatalogoerror' => $row['IdCatalogoerror'],
                 'CreatedAt' => $row['CreatedAt'],
                 'UpdatedAt' => $row['UpdatedAt'],
                 'Enabled' => $row['Enabled']
             );
-            array_push($roltems, $item); // Usar la variable $roltems en lugar de $rol
-            $this->printJSON($roltems);
+            array_push($errorItems, $item); // Usar la variable $errorItems en lugar de $error
+            $this->printJSON($errorItems);
         } else {
             $this->error('No hay elementos');
         }
@@ -70,4 +64,3 @@ class ApiRoles {
     }
 }
 ?>
-
