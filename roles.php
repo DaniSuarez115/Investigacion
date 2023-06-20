@@ -9,6 +9,12 @@ class Roles extends db
         return $query;
 
     }
+
+    function obtenerRol($IdRol){
+        $query = $this->connect()->prepare('SELECT * FROM menu WHERE IdRol = :IdRol');
+        $query->execute(['IdRol' => $IdRol]);
+        return $query;
+    }
 }
 
 
