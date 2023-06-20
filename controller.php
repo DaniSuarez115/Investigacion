@@ -8,4 +8,9 @@ class Controller extends db
         $query = $this->connect()->query('SELECT * FROM controller');
         return $query;
     }
+    function obtenerController($IdController){
+        $query = $this->connect()->prepare('SELECT * FROM controller WHERE IdController = :IdController');
+        $query->execute(['IdController' => $IdController]);
+        return $query;
+    }
 }?>

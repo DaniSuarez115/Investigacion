@@ -3,7 +3,7 @@
 include_once 'auditoria.php';
 class Apiauditoria {
     function getAll() {
-        $auditoria = new auditoria();
+        $auditoria = new Auditoria();
         $response = array();
         $response["items"] = array();
         $respuesta = $auditoria->getAuditoria();
@@ -43,7 +43,7 @@ class Apiauditoria {
                 'Controller' => $row['Controller'],
                 'IdMenu' => $row['IdMenu'],
                 'IdUser' => $row['IdUser'],
-                'createDate' => $row['createDate']
+                'CreateDate' => $row['CreateDate']
             );
             array_push($auditoriaItems, $item); // Usar la variable $auditoriaItems en lugar de $auditoria
             $this->printJSON($auditoriaItems);

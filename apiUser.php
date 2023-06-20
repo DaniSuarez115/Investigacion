@@ -36,7 +36,7 @@ class Apiuser {
         $user = new User(); // Crear una instancia de la clase User
         $userItems = array(); // Cambiar el nombre de la variable para evitar sobrescribir la instancia
     
-        $res = $menu->obtenerMenu($IdUser);
+        $res = $user->obtenerUser($IdUser);
     
         if ($res->rowCount() == 1) {
             $row = $res->fetch();
@@ -54,7 +54,7 @@ class Apiuser {
                 'Enabled' => $row['Enabled'],
                 'UpdatedAt' => $row['UpdatedAt']
             );
-            array_push(  $userItems, $item); // Usar la variable $userItems en lugar de $menu
+            array_push(  $userItems, $item); // Usar la variable $userItems en lugar de $user
             $this->printJSON($userItems);
         } else {
             $this->error('No hay elementos');

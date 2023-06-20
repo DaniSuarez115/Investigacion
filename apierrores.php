@@ -27,26 +27,24 @@ class ApiErrores {
             echo json_encode(array('mensaje' => 'No hay elementos'));
         }
     }
-
-    function getById($Iderror) {
-        $error = new error(); // Crear una instancia de la clase error
-        $errorItems = array(); // Cambiar el nombre de la variable para evitar sobrescribir la instancia
+    function getById($IdErrores) {
+        $errores = new errores(); // Crear una instancia de la clase errores
+        $erroresItems = array(); // Cambiar el nombre de la variable para evitar sobrescribir la instancia
     
-        $res = $error->obtenererror($Iderror);
+        $res = $errores->obtenerErrores($IdErrores);
     
         if ($res->rowCount() == 1) {
             $row = $res->fetch();
         
             $item = array(
-                'Iderror' => $row['Iderror'],
-                'Nameerror' => $row['Nameerror'],
-                'IdCatalogoerror' => $row['IdCatalogoerror'],
-                'CreatedAt' => $row['CreatedAt'],
-                'UpdatedAt' => $row['UpdatedAt'],
-                'Enabled' => $row['Enabled']
+                'IdErrores' => $row['IdErrores'],
+                    'Sentencia' => $row['Sentencia'],
+                    'Controller' => $row['Controller'],
+                    'CreatedAt' => $row['CreatedAt'],
+                    'IdUser' => $row['IdUser']
             );
-            array_push($errorItems, $item); // Usar la variable $errorItems en lugar de $error
-            $this->printJSON($errorItems);
+            array_push($erroresItems, $item); // Usar la variable $erroresItems en lugar de $errores
+            $this->printJSON($erroresItems);
         } else {
             $this->error('No hay elementos');
         }
@@ -62,5 +60,6 @@ class ApiErrores {
     function exito($mensaje){
         echo '<code>' . json_encode(array('mensaje' => $mensaje)) . '</code>'; 
     }
+    
 }
 ?>

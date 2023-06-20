@@ -7,5 +7,11 @@ class Errores extends db
         $query = $this->connect()->query('SELECT * FROM errores');
         return $query;
     }
+    
+    function obtenerErrores($IdErrores){
+        $query = $this->connect()->prepare('SELECT * FROM errores WHERE IdErrores = :IdErrores');
+        $query->execute(['IdErrores' => $IdErrores]);
+        return $query;
+    }
 }
 ?>
