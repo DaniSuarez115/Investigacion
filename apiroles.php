@@ -20,7 +20,7 @@ class ApiRoles {
                 $item = array(
                     'IdRol' => $row['IdRol'],
                     'NameRol' => $row['NameRol'],
-                    'IdRol' => $row['IdRol'],
+                    'IdMenu' => $row['IdMenu'],
                     'CreatedAt' => $row['CreatedAt'],
                     'UpdatedAt' => $row['UpdatedAt'],
                     'Enabled' => $row['Enabled']
@@ -46,7 +46,7 @@ class ApiRoles {
             $item = array(
                 'IdRol' => $row['IdRol'],
                 'NameRol' => $row['NameRol'],
-                'IdRol' => $row['IdRol'],
+                'IdMenu' => $row['IdMenu'],
                 'CreatedAt' => $row['CreatedAt'],
                 'UpdatedAt' => $row['UpdatedAt'],
                 'Enabled' => $row['Enabled']
@@ -57,6 +57,7 @@ class ApiRoles {
             $this->error('No hay elementos');
         }
     }
+
 
     function error($mensaje){
         echo '<code>' . json_encode(array('mensaje' => $mensaje)) . '</code>'; 

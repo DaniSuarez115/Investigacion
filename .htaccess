@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^insertarmenu/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)$ insertarmenu.php?IdMenu=$1&NameMenu=$2&IdCatalogoMenu=$3&CreatedAt=$4&UpdatedAt=$5&Enabled=$6 [L]
