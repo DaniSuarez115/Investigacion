@@ -8,10 +8,10 @@ class db {
 
 	
 	function __construct(){
-		$this->host     = 'localhost';
-        $this->db       = 'api';
-        $this->user     = 'root';
-        $this->password = "";
+		$this->host     = 'sql863.main-hosting.eu';
+        $this->db       = 'u484426513_mvc';
+        $this->user     = 'u484426513_mvc';
+        $this->password = "#7cYr646u@*Rp.P";
         $this->charset  = 'utf8mb4';
 	}
 

@@ -1,6 +1,6 @@
 <?php
        include_once 'apiuser.php';
-       $api = new apiUser();
+       $api = new ApiUser();
    
        if(isset($_GET['IdUser'])){
            $IdUser = $_GET['IdUser'];

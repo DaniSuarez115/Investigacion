@@ -1,7 +1,6 @@
 <?php
-include_once 'apiuser.php';
 include_once 'user.php';
-class Apiuser {
+class ApiUser {
     function getAll() {
         $user = new User();
         $response = array();
@@ -12,13 +11,13 @@ class Apiuser {
             while ($row = $respuesta->fetch(PDO::FETCH_ASSOC)) {
                 $item = array(
                     'IdUser' => $row['IdUser'],
-                    'ldPersonal' => $row['ldPersonal'],
-                    'Nameuser' => $row['Nameuser'],
+                    'IdPersonal' => $row['IdPersonal'],
+                    'NameUser' => $row['NameUser'],
                     'LastName' => $row['LastName'],
                     'Email' => $row['Email'],
                     'UserName' => $row['UserName'],
                     'Password' => $row['Password'],
-                    'IdRol' => $row['Enabled'],
+                    'IdRol' => $row['IdRol'],
                     'CreatedAt' => $row['CreatedAt'],
                     'Enabled' => $row['Enabled'],
                     'UpdatedAt' => $row['UpdatedAt']
