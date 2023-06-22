@@ -57,6 +57,39 @@ class ApiRoles {
             $this->error('No hay elementos');
         }
     }
+    function eliminarById($IdRol) {
+        $menu = new Menu(); // Crear una instancia de la clase Menu
+    
+        $res = $menu->obtenerMenu($IdRol); // Obtener el menú por IdRol
+    
+        if ($res->rowCount() == 1) {
+            $row = $res->fetch();
+    
+            // Obtener los datos del menú
+            $IdRol = $row['IdRol'];
+            $NameRol = $row['NameMenu'];
+            $IdMenu= $row['IdMenu'];
+            $CreatedAt = $row['CreatedAt'];
+            $UpdatedAt = $row['UpdatedAt'];
+            $Enabled = $row['Enabled'];
+    
+            // Eliminar el menú
+            $menu->eliminarMenu($IdRol);
+    
+            $item = array(
+                'IdRol' => $row['IdRol'],
+                'NameRol' => $row['NameRol'],
+                'IdMenu' => $row['IdMenu'],
+                'CreatedAt' => $row['CreatedAt'],
+                'UpdatedAt' => $row['UpdatedAt'],
+                'Enabled' => $row['Enabled']
+            );
+    
+            $this->printJSON($item);
+        } else {
+            $this->error('chupapijas borrado');
+        }
+    }
 
 
     function error($mensaje){
@@ -69,6 +102,9 @@ class ApiRoles {
     function exito($mensaje){
         echo '<code>' . json_encode(array('mensaje' => $mensaje)) . '</code>'; 
     }
+
+    
+
 }
 ?>
 
