@@ -3,7 +3,7 @@
       $api = new ApiRoles();
   
       if(isset($_GET['IdRol'])){
-          $IdRol = $_GET['IdRol'];
+          $IdRol2 = $_GET['IdRol'];
   
           if(is_numeric($IdRol)){
               $api->getById($IdRol);

@@ -30,6 +30,12 @@ class Auditoria extends db
         return $query;
     }
 
+    function eliminarAuditoria($IdAuditoria){
+        $query = $this->connect()->prepare('DELETE FROM auditoria WHERE IdAuditoria = :IdAuditoria');
+        $query->execute(['IdAuditoria' => $IdAuditoria]);
+        return $query;
+    }
+
     function editarAuditoria($IdAuditoria, $Sentencia, $Controller, $IdMenu, $IdUser, $CreateDate)
     {
         $query = $this->connect()->prepare('UPDATE auditoria SET Sentencia = :Sentencia, Controller = :Controller, IdMenu = :IdMenu, IdUser = :IdUser, CreateDate = :CreateDate WHERE IdAuditoria = :IdAuditoria');

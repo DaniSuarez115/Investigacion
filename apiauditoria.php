@@ -52,6 +52,40 @@ class Apiauditoria {
         }
     }
 
+    function eliminarById($IdAuditoria) {
+        $auditoria = new auditoria(); // Crear una instancia de la clase auditoria
+    
+        $res = $auditoria->obtenerauditoria($IdAuditoria); // Obtener el menú por IdAuditoria
+    
+        if ($res->rowCount() == 1) {
+            $row = $res->fetch();
+    
+            // Obtener los datos del menú
+            $IdAuditoria = $row['IdAuditoria'];
+            $Sentencia = $row['Sentencia'];
+            $Controller = $row['Controller'];
+            $IdMenu = $row['IdMenu'];
+            $IdUser = $row['IdUser'];
+            $CreateDate = $row['CreateDate'];
+    
+            // Eliminar el menú
+            $auditoria->eliminarAuditoria($IdAuditoria);
+    
+            $item = array(
+                'IdAuditoria' => $row['IdAuditoria'],
+                'Sentencia' => $row['Sentencia'],
+                'Controller' => $row['Controller'],
+                'IdMenu' => $row['IdMenu'],
+                'IdUser' => $row['IdUser'],
+                'CreateDate' => $row['CreateDate']
+            );
+    
+            $this->printJSON($item);
+        } else {
+            $this->error('no se encontró');
+        }
+    }
+
     function insertarAuditoria($IdAuditoria, $Sentencia, $Controller, $IdMenu, $IdUser, $CreateDate)
     {
         $auditoria = new Auditoria(); // Crear una instancia de la clase Auditoria
