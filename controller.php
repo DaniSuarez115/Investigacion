@@ -14,6 +14,13 @@ class Controller extends db
         return $query;
     }
 
+
+    function eliminarController($IdController){
+        $query = $this->connect()->prepare('DELETE FROM controller WHERE IdController = :IdController');
+        $query->execute(['IdController' => $IdController]);
+        return $query;
+    }
+
     function insertarController($IdController, $NameControllerView, $CreatedAt, $UpdatedAt, $Enabled)
     {
         $query = $this->connect()->prepare('INSERT INTO controller (IdController, NameControllerView, CreatedAt, UpdatedAt, Enabled) VALUES (:IdController, :NameControllerView, :CreatedAt, :UpdatedAt, :Enabled)');

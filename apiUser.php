@@ -74,6 +74,52 @@ class Apiuser {
         }
     }
 
+    function eliminarById($IdUser) {
+        $user = new user(); // Crear una instancia de la clase user
+    
+        $res = $user->obtenerUser($IdUser); // Obtener el menú por IdUser
+    
+        if ($res->rowCount() == 1) {
+            $row = $res->fetch();
+    
+            // Obtener los datos del menú
+            $IdUser = $row['IdUser'];
+            $ldPersonal = $row['ldPersonal'];
+            $Nameuser = $row['Nameuser'];
+            $LastName = $row['LastName'];
+            $Email = $row['Email'];
+            $UserName = $row['UserName'];
+            $Password = $row['Password'];
+            $IdRol = $row['IdRol'];
+            $CreatedAt = $row['CreatedAt'];
+            $Enabled = $row['Enabled'];
+            $Enabled = $row['Enabled'];
+            $UpdatedAt = $row['UpdatedAt'];
+    
+            // Eliminar el menú
+            $user->eliminarUser($IdUser);
+    
+            $item = array(
+                'IdUser' => $row['IdUser'],
+                'ldPersonal' => $row['ldPersonal'],
+                'Nameuser' => $row['Nameuser'],
+                'LastName' => $row['LastName'],
+                'Email' => $row['Email'],
+                'UserName' => $row['UserName'],
+                'Password' => $row['Password'],
+                'IdRol' => $row['Enabled'],
+                'CreatedAt' => $row['CreatedAt'],
+                'Enabled' => $row['Enabled'],
+                'UpdatedAt' => $row['UpdatedAt']
+            );
+    
+            $this->printJSON($item);
+        } else {
+            $this->error('no se encontró');
+        }
+    }
+
+
      function editarUser($IdUser, $ldPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdatedAt)
     {
         $user = new User(); // Crear una instancia de la clase User

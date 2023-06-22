@@ -12,6 +12,13 @@ class User extends db
         $query->execute(['IdUser' => $IdUser]);
         return $query;
     }
+
+    function eliminarUser($IdUser){
+        $query = $this->connect()->prepare('DELETE FROM user WHERE IdUser = :IdUser');
+        $query->execute(['IdUser' => $IdUser]);
+        return $query;
+    }
+
     function insertarUser($IdUser, $ldPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdatedAt)
     {
         $query = $this->connect()->prepare('INSERT INTO user (IdUser, ldPersonal, NameUser, LastName, Email, UserName, Password, IdRol, CreatedAt, Enabled, UpdatedAt) VALUES (:IdUser, :ldPersonal, :NameUser, :LastName, :Email, :UserName, :Password, :IdRol, :CreatedAt, :Enabled, :UpdatedAt)');

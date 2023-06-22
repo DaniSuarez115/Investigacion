@@ -50,6 +50,37 @@ class ApiController {
         }
     }
 
+    function eliminarById($IdController) {
+        $controller = new controller(); // Crear una instancia de la clase controller
+    
+        $res = $controller->obtenercontroller($IdController); // Obtener el menú por IdController
+    
+        if ($res->rowCount() == 1) {
+            $row = $res->fetch();
+    
+            // Obtener los datos del menú
+            $IdController = $row['IdController'];
+            $NameControllerView = $row['NameControllerView'];
+            $CreatedAt = $row['CreatedAt'];
+            $UpdatedAt = $row['UpdatedAt'];
+            $Enabled = $row['Enabled'];
+
+            $controller->eliminarcontroller($IdController);
+    
+            $item = array(
+                'IdController' => $row['IdController'],
+                'NameControllerView' => $row['NameControllerView'],
+                'CreatedAt' => $row['CreatedAt'],
+                'UpdatedAt' => $row['UpdatedAt'],
+                'Enabled' => $row['Enabled']
+            );
+    
+            $this->printJSON($item);
+        } else {
+            $this->error('no se encontró');
+        }
+    }
+
     function insertarController($IdController, $NameControllerView, $CreatedAt, $UpdatedAt, $Enabled)
     {
         $controller = new Controller(); // Crear una instancia de la clase Controller
