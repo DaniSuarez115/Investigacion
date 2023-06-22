@@ -52,6 +52,52 @@ class Apiauditoria {
         }
     }
 
+    function insertarAuditoria($IdAuditoria, $Sentencia, $Controller, $IdMenu, $IdUser, $CreateDate)
+    {
+        $auditoria = new Auditoria(); // Crear una instancia de la clase Auditoria
+
+        // Insertar la auditoría en la base de datos
+        $resultado = $auditoria->insertarAuditoria($IdAuditoria, $Sentencia, $Controller, $IdMenu, $IdUser, $CreateDate);
+
+        if ($resultado) {   
+            $item = array(
+                'IdAuditoria' => $IdAuditoria,
+                'Sentencia' => $Sentencia,
+                'Controller' => $Controller,
+                'IdMenu' => $IdMenu,
+                'IdUser' => $IdUser,
+                'CreateDate' => $CreateDate
+            );
+
+            // Realizar cualquier acción adicional con el resultado de la inserción
+        } else {
+            $this->error('Error al insertar la auditoría');
+        }
+    }
+    function editarAuditoria($IdAuditoria, $Sentencia, $Controller, $IdMenu, $IdUser, $CreateDate)
+{
+    $auditoria = new Auditoria(); // Crear una instancia de la clase Auditoria
+
+    // Actualizar la auditoría en la base de datos
+    $resultado = $auditoria->editarAuditoria($IdAuditoria, $Sentencia, $Controller, $IdMenu, $IdUser, $CreateDate);
+
+    if ($resultado) {
+        $item = array(
+            'IdAuditoria' => $IdAuditoria,
+            'Sentencia' => $Sentencia,
+            'Controller' => $Controller,
+            'IdMenu' => $IdMenu,
+            'IdUser' => $IdUser,
+            'CreateDate' => $CreateDate
+        );
+
+        // Realizar cualquier otra acción necesaria con la auditoría actualizada
+
+    } else {
+        $this->error('Error al editar la auditoría');
+    }
+}
+
     function error($mensaje){
         echo '<code>' . json_encode(array('mensaje' => $mensaje)) . '</code>'; 
     }

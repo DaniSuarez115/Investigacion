@@ -1,7 +1,7 @@
 <?php
-// include_once 'apicontroller.php';
+include_once 'apicontroller.php';
 include_once 'controller.php';
-class Apicontroller {
+class ApiController {
     function getAll() {
         $controller = new Controller();
         $response = array();
@@ -49,6 +49,52 @@ class Apicontroller {
             $this->error('No hay elementos');
         }
     }
+
+    function insertarController($IdController, $NameControllerView, $CreatedAt, $UpdatedAt, $Enabled)
+    {
+        $controller = new Controller(); // Crear una instancia de la clase Controller
+
+        // Insertar el registro en la base de datos
+        $resultado = $controller->insertarController($IdController, $NameControllerView, $CreatedAt, $UpdatedAt, $Enabled);
+
+        if ($resultado) {
+            $item = array(
+                'IdController' => $IdController,
+                'NameControllerView' => $NameControllerView,
+                'CreatedAt' => $CreatedAt,
+                'UpdatedAt' => $UpdatedAt,
+                'Enabled' => $Enabled
+            );
+
+            // Realizar cualquier acción adicional con el resultado de la inserción
+        } else {
+            $this->error('Error al insertar el controller');
+        }
+    }
+
+    function editarController($IdController, $NameControllerView, $CreatedAt, $UpdatedAt, $Enabled)
+    {
+        $controller = new Controller(); // Crear una instancia de la clase Controller
+
+        // Actualizar el registro en la base de datos
+        $resultado = $controller->editarController($IdController, $NameControllerView, $CreatedAt, $UpdatedAt, $Enabled);
+
+        if ($resultado) {
+            $item = array(
+                'IdController' => $IdController,
+                'NameControllerView' => $NameControllerView,
+                'CreatedAt' => $CreatedAt,
+                'UpdatedAt' => $UpdatedAt,
+                'Enabled' => $Enabled
+            );
+
+            // Realizar cualquier acción adicional con el resultado de la actualización
+        } else {
+            $this->error('Error al editar el controller');
+        }
+    }
+
+
 
     function error($mensaje){
         echo '<code>' . json_encode(array('mensaje' => $mensaje)) . '</code>'; 

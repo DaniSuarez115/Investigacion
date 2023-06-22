@@ -58,7 +58,7 @@ class User extends db
         $query->execute();
 
         return $query;
-    }
+    }   
 
 }
 ?>

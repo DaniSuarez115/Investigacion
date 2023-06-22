@@ -91,6 +91,55 @@ class ApiRoles {
         }
     }
 
+    function insertarRol($IdRol, $NameRol, $IdMenu, $CreatedAt, $UpdatedAt, $Enabled)
+    {
+        $rol = new Roles(); // Crear una instancia de la clase Rol
+
+        // Insertar el rol en la base de datos
+        $resultado = $rol->insertarRol($IdRol, $NameRol, $IdMenu, $CreatedAt, $UpdatedAt, $Enabled);
+
+        if ($resultado) {   
+            $item = array(
+                'IdRol' => $IdRol,
+                'NameRol' => $NameRol,
+                'IdMenu' => $IdMenu,
+                'CreatedAt' => $CreatedAt,
+                'UpdatedAt' => $UpdatedAt,
+                'Enabled' => $Enabled
+            );
+
+            
+        } else {
+            $this->error('Error al insertar el rol');
+        }
+    }
+
+    function editarRol($IdRol, $NameRol, $IdMenu, $CreatedAt, $UpdatedAt, $Enabled)
+    {
+        $rol = new Roles(); // Crear una instancia de la clase Roles
+
+        // Actualizar el rol en la base de datos
+        $resultado = $rol->editarRol($IdRol, $NameRol, $IdMenu, $CreatedAt, $UpdatedAt, $Enabled);
+
+        if ($resultado) {   
+            $item = array(
+                'IdRol' => $IdRol,
+                'NameRol' => $NameRol,
+                'IdMenu' => $IdMenu,
+                'CreatedAt' => $CreatedAt,
+                'UpdatedAt' => $UpdatedAt,
+                'Enabled' => $Enabled
+            );
+
+            // Realizar cualquier otra acción necesaria con el rol actualizado
+            
+        } else {
+            $this->error('Error al editar el rol');
+        }
+    }
+
+
+
 
     function error($mensaje){
         echo '<code>' . json_encode(array('mensaje' => $mensaje)) . '</code>'; 

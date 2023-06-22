@@ -50,6 +50,56 @@ class ApiErrores {
         }
     }
 
+    function insertarErrores($IdErrores, $Sentencia, $Controller, $CreatedAt, $IdUser)
+    {
+        $errores = new Errores(); // Crear una instancia de la clase Errores
+
+        // Insertar los datos de errores en la base de datos
+        $resultado = $errores->insertarErrores($IdErrores, $Sentencia, $Controller, $CreatedAt, $IdUser);
+
+        if ($resultado) {   
+            $item = array(
+                'IdErrores' => $IdErrores,
+                'Sentencia' => $Sentencia,
+                'Controller' => $Controller,
+                'CreatedAt' => $CreatedAt,
+                'IdUser' => $IdUser
+            );
+
+            // Realizar cualquier acción adicional con el resultado de la inserción
+        } else {
+            $this->error('Error al insertar los errores');
+        }
+    }
+
+    function editarErrores($IdErrores, $Sentencia, $Controller, $CreatedAt, $IdUser)
+    {
+        $errores = new Errores(); // Crear una instancia de la clase Errores
+    
+        // Verificar la existencia del IdErrores
+        if (!$errores->verificarExistenciaIdErrores($IdErrores)) {
+            $this->error('El IdErrores no existe');
+            return;
+        }
+    
+        // Actualizar los datos de errores en la base de datos
+        $resultado = $errores->editarErrores($IdErrores, $Sentencia, $Controller, $CreatedAt, $IdUser);
+    
+        if ($resultado) {   
+            $item = array(
+                'IdErrores' => $IdErrores,
+                'Sentencia' => $Sentencia,
+                'Controller' => $Controller,
+                'CreatedAt' => $CreatedAt,
+                'IdUser' => $IdUser
+            );
+    
+            // Realizar cualquier acción adicional con el resultado de la actualización
+        } else {
+            $this->error('Error al editar los errores');
+        }
+    }
+
     function error($mensaje){
         echo '<code>' . json_encode(array('mensaje' => $mensaje)) . '</code>'; 
     }
