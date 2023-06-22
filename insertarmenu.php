@@ -24,15 +24,11 @@ if (count($segments) >= 7) {
 
     // Crear una instancia de la clase ApiMenu
     $api = new ApiMenu();
-
+    echo $Enabled;
     // Llamar a la función insertarMenu con los valores de los parámetros
-    $result = $api->insertarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled);
+    $api->insertarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, (bool)$Enabled);
 
-    if ($result) {
-        echo 'Los datos del menú se insertaron correctamente.';
-    } else {
-        echo 'Error al insertar los datos del menú.';
-    }
+    echo 'Los datos del menú se insertaron correctamente.';
 } else {
     echo 'Faltan parámetros en la URL.';
 }

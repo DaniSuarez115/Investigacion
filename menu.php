@@ -19,40 +19,42 @@ class Menu extends db
         $query->execute(['IdMenu' => $IdMenu]);
         return $query;
     }
-
-    function insertarMenuBd($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled) {
+    
+    function insertarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled)
+    {
         $query = $this->connect()->prepare('INSERT INTO menu (IdMenu, NameMenu, IdCatalogoMenu, CreatedAt, UpdatedAt, Enabled) VALUES (:IdMenu, :NameMenu, :IdCatalogoMenu, :CreatedAt, :UpdatedAt, :Enabled)');
-        $query->execute([
-            'IdMenu' => $IdMenu,
-            'NameMenu' => $NameMenu,
-            'IdCatalogoMenu' => $IdCatalogoMenu,
-            'CreatedAt' => $CreatedAt,
-            'UpdatedAt' => $UpdatedAt,
-            'Enabled' => $Enabled
-        ]);
+        
+        // Convertir el valor de Enabled a un entero
+        $enabledValue = ($Enabled) ? 1 : 0;
+    
+        $query->bindParam(':IdMenu', $IdMenu);
+        $query->bindParam(':NameMenu', $NameMenu);
+        $query->bindParam(':IdCatalogoMenu', $IdCatalogoMenu);
+        $query->bindParam(':CreatedAt', $CreatedAt);
+        $query->bindParam(':UpdatedAt', $UpdatedAt);
+        $query->bindParam(':Enabled', $enabledValue, PDO::PARAM_INT);
+    
+        $query->execute();
+    
         return $query;
     }
 
     function editarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled) {
         $query = $this->connect()->prepare('UPDATE menu SET NameMenu = :NameMenu, IdCatalogoMenu = :IdCatalogoMenu, CreatedAt = :CreatedAt, UpdatedAt = :UpdatedAt, Enabled = :Enabled WHERE IdMenu = :IdMenu');
-        $result = $query->execute([
-            'IdMenu' => $IdMenu,
-            'NameMenu' => $NameMenu,
-            'IdCatalogoMenu' => $IdCatalogoMenu,
-            'CreatedAt' => $CreatedAt,
-            'UpdatedAt' => $UpdatedAt,
-            'Enabled' => $Enabled
-        ]);
+        $query->bindParam(':IdMenu', $IdMenu);
+        $query->bindParam(':NameMenu', $NameMenu);
+        $query->bindParam(':IdCatalogoMenu', $IdCatalogoMenu);
+        $query->bindParam(':CreatedAt', $CreatedAt);
+        $query->bindParam(':UpdatedAt', $UpdatedAt);
         
-        // Verificar si la actualización fue exitosa
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
+        // Convertir el valor de Enabled a un entero
+        $enabledValue = ($Enabled) ? 1 : 0;
+        $query->bindParam(':Enabled', $enabledValue, PDO::PARAM_INT);
+
+        $query->execute();
+
+        return $query;
     }
-
 }
-
-
 ?>
+

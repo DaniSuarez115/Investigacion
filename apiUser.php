@@ -61,6 +61,34 @@ class Apiuser {
         }
     }
 
+    function insertarUser($IdUser, $ldPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdatedAt) {
+        $user = new User(); // Crear una instancia de la clase User
+    
+        // Insertar el usuario en la base de datos
+        $resultado = $user->insertarUser($IdUser, $ldPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdatedAt);
+    
+        if ($resultado) {
+            // Los datos del usuario se insertaron correctamente
+        } else {
+            $this->error('Error al insertar el usuario');
+        }
+    }
+
+     function editarUser($IdUser, $ldPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdatedAt)
+    {
+        $user = new User(); // Crear una instancia de la clase User
+
+        // Actualizar el usuario en la base de datos
+        $resultado = $user->editarUser($IdUser, $ldPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdatedAt);
+
+        if ($resultado) {
+            // Éxito en la edición del usuario
+        } else {
+            // Error al editar el usuario
+            $this->error('Error al editar el usuario');
+        }
+    }
+
     function error($mensaje){
         echo '<code>' . json_encode(array('mensaje' => $mensaje)) . '</code>'; 
     }

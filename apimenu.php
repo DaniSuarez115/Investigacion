@@ -1,5 +1,4 @@
 <?php
-// include_once 'apimenu.php';
 include_once 'menu.php';
 
 class ApiMenu {
@@ -87,44 +86,35 @@ class ApiMenu {
         }
     }
 
-    public function insertarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled) {
+
+    function insertarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled) {
         $menu = new Menu(); // Crear una instancia de la clase Menu
 
-        // Realizar la inserción en la base de datos
-        $query = $menu->connect()->prepare('INSERT INTO menu (IdMenu, NameMenu, IdCatalogoMenu, CreatedAt, UpdatedAt, Enabled) VALUES (:IdMenu, :NameMenu, :IdCatalogoMenu, :CreatedAt, :UpdatedAt, :Enabled)');
-        $result = $query->execute([
-            'IdMenu' => $IdMenu,
-            'NameMenu' => $NameMenu,
-            'IdCatalogoMenu' => $IdCatalogoMenu,
-            'CreatedAt' => $CreatedAt,
-            'UpdatedAt' => $UpdatedAt,
-            'Enabled' => $Enabled
-        ]);
+        // Insertar el menú en la base de datos
+        $resultado = $menu->insertarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled);
 
-        // Verificar si la inserción fue exitosa
-        if ($result) {
-            return true;
+        if ($resultado) {   
         } else {
-            return false;
+            $this->error('Error al insertar el menú');
         }
     }
-
 
     function editarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled) {
         $menu = new Menu(); // Crear una instancia de la clase Menu
 
-        $Enabled = intval($Enabled);
-    
-        // Realizar la actualización en la base de datos
-        $result = $menu->editarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled);
-    
-        // Verificar si la actualización fue exitosa
-        if ($result) {
-            return true;
+        // Actualizar el menú en la base de datos
+        $resultado = $menu->editarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled);
+
+        if ($resultado) {
+            $this->exito('Los datos del menu se editaron correctamente.');
         } else {
-            return false;
+            $this->error('Error al editar los datos del menú.');
         }
     }
+
+    
+
+    
 
 
     function error($mensaje){

@@ -24,15 +24,10 @@ if (count($segments) >= 7) {
 
     // Crear una instancia de la clase ApiMenu
     $api = new ApiMenu();
-
     // Llamar a la función editarMenu con los valores de los parámetros
-    $result = $api->editarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, $Enabled);
+    $api->editarMenu($IdMenu, $NameMenu, $IdCatalogoMenu, $CreatedAt, $UpdatedAt, (bool)$Enabled);
 
-    if ($result) {
-        echo 'Los datos del menú se editaron correctamente.';
-    } else {
-        echo 'Error al editar los datos del menú.';
-    }
+    echo 'Los datos del menú se editaron correctamente.';
 } else {
     echo 'Faltan parámetros en la URL.';
 }

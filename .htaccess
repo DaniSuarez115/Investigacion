@@ -2,4 +2,6 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^insertarmenu/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)$ insertarmenu.php?IdMenu=$1&NameMenu=$2&IdCatalogoMenu=$3&CreatedAt=$4&UpdatedAt=$5&Enabled=$6 [L]
-RewriteRule ^editarmenu/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)$ editarmenu.php?IdMenu=$1&NameMenu=$2&IdCatalogoMenu=$3&CreatedAt=$4&UpdatedAt=$5&Enabled=$6 [L]
+RewriteRule ^editarmenu/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)$ editarmenu.php?IdMenu=$1&NameMenu=$2&IdCatalogoMenu=$3&CreatedAt=$4&UpdatedAt=$5&Enabled=$6 [L]
+RewriteRule ^insertaruser/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)$ insertaruser.php?IdUser=$1&ldPersonal=$2&NameUser=$3&LastName=$4&Email=$5&UserName=$6&Password=$7&IdRol=$8&CreatedAt=$9&Enabled=$10&UpdatedAt=$11 [L]
+RewriteRule ^editaruser/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)$ editaruser.php?IdUser=$1&ldPersonal=$2&NameUser=$3&LastName=$4&Email=$5&UserName=$6&Password=$7&IdRol=$8&CreatedAt=$9&Enabled=$10&UpdatedAt=$11 [L]
