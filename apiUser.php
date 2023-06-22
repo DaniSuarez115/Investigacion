@@ -20,7 +20,7 @@ class ApiUser {
                     'IdRol' => $row['IdRol'],
                     'CreatedAt' => $row['CreatedAt'],
                     'Enabled' => $row['Enabled'],
-                    'UpdatedAt' => $row['UpdatedAt']
+                    'UpdateAt' => $row['UpdateAt'],
                 );
                 array_push($response['items'], $item);
             }
@@ -43,15 +43,15 @@ class ApiUser {
             $item = array(
                 'IdUser' => $row['IdUser'],
                 'ldPersonal' => $row['ldPersonal'],
-                'Nameuser' => $row['Nameuser'],
+                'NameUser' => $row['NameUser'],
                 'LastName' => $row['LastName'],
                 'Email' => $row['Email'],
                 'UserName' => $row['UserName'],
                 'Password' => $row['Password'],
-                'IdRol' => $row['Enabled'],
+                'IdRol' => $row['IdRol'],
                 'CreatedAt' => $row['CreatedAt'],
                 'Enabled' => $row['Enabled'],
-                'UpdatedAt' => $row['UpdatedAt']
+                'UpdateAt' => $row['UpdateAt']
             );
             array_push(  $userItems, $item); // Usar la variable $userItems en lugar de $user
             $this->printJSON($userItems);
@@ -60,11 +60,11 @@ class ApiUser {
         }
     }
 
-    function insertarUser($IdUser, $ldPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdatedAt) {
+    function insertarUser($IdUser, $ldPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdateAt) {
         $user = new User(); // Crear una instancia de la clase User
     
         // Insertar el usuario en la base de datos
-        $resultado = $user->insertarUser($IdUser, $ldPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdatedAt);
+        $resultado = $user->insertarUser($IdUser, $ldPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdateAt);
     
         if ($resultado) {
             // Los datos del usuario se insertaron correctamente
@@ -83,8 +83,8 @@ class ApiUser {
     
             // Obtener los datos del menú
             $IdUser = $row['IdUser'];
-            $ldPersonal = $row['ldPersonal'];
-            $Nameuser = $row['Nameuser'];
+            $IdPersonal = $row['IdPersonal'];
+            $NameUser = $row['NameUser'];
             $LastName = $row['LastName'];
             $Email = $row['Email'];
             $UserName = $row['UserName'];
@@ -92,24 +92,23 @@ class ApiUser {
             $IdRol = $row['IdRol'];
             $CreatedAt = $row['CreatedAt'];
             $Enabled = $row['Enabled'];
-            $Enabled = $row['Enabled'];
-            $UpdatedAt = $row['UpdatedAt'];
+            $UpdateAt = $row['UpdateAt'];
     
             // Eliminar el menú
             $user->eliminarUser($IdUser);
     
             $item = array(
                 'IdUser' => $row['IdUser'],
-                'ldPersonal' => $row['ldPersonal'],
-                'Nameuser' => $row['Nameuser'],
+                'IdPersonal' => $row['IdPersonal'],
+                'NameUser' => $row['NameUser'],
                 'LastName' => $row['LastName'],
                 'Email' => $row['Email'],
                 'UserName' => $row['UserName'],
                 'Password' => $row['Password'],
-                'IdRol' => $row['Enabled'],
+                'IdRol' => $row['IdRol'],
                 'CreatedAt' => $row['CreatedAt'],
                 'Enabled' => $row['Enabled'],
-                'UpdatedAt' => $row['UpdatedAt']
+                'UpdateAt' => $row['UpdateAt']
             );
     
             $this->printJSON($item);
@@ -119,12 +118,12 @@ class ApiUser {
     }
 
 
-     function editarUser($IdUser, $ldPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdatedAt)
+     function editarUser($IdUser, $IdPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdateAt)
     {
         $user = new User(); // Crear una instancia de la clase User
 
         // Actualizar el usuario en la base de datos
-        $resultado = $user->editarUser($IdUser, $ldPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdatedAt);
+        $resultado = $user->editarUser($IdUser, $IdPersonal, $NameUser, $LastName, $Email, $UserName, $Password, $IdRol, $CreatedAt, $Enabled, $UpdateAt);
 
         if ($resultado) {
             // Éxito en la edición del usuario

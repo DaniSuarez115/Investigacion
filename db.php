@@ -14,7 +14,7 @@ class db {
         $this->password = "#7cYr646u@*Rp.P";
         $this->charset  = 'utf8mb4';
 	}
-
+    
 	function connect(){
     
         try{
