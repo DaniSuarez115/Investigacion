@@ -82,7 +82,7 @@ class ApiMenu {
     
             $this->printJSON($item);
         } else {
-            $this->error('chupapijas borrado');
+            $this->error('no se encontró');
         }
     }
 

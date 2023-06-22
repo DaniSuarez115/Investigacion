@@ -16,6 +16,14 @@ class Roles extends db
         return $query;
     }
 
+
+    function eliminarRol($IdRol){
+        $query = $this->connect()->prepare('DELETE FROM roles WHERE IdRol = :IdRol');
+        $query->execute(['IdRol' => $IdRol]);
+        return $query;
+    }
+
+    
     function insertarRol($IdRol, $NameRol, $IdMenu, $CreatedAt, $UpdatedAt, $Enabled)
     {
         $query = $this->connect()->prepare('INSERT INTO roles (IdRol, NameRol, IdMenu, CreatedAt, UpdatedAt, Enabled) VALUES (:IdRol, :NameRol, :IdMenu, :CreatedAt, :UpdatedAt, :Enabled)');

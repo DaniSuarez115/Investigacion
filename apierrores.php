@@ -50,6 +50,39 @@ class ApiErrores {
         }
     }
 
+    function eliminarById($IdErrores) {
+        $error = new Errores(); // Crear una instancia de la clase error
+    
+        $res = $error->obtenErerrores($IdErrores); // Obtener el menú por IdErrores
+    
+        if ($res->rowCount() == 1) {
+            $row = $res->fetch();
+    
+            // Obtener los datos del menú
+            $IdErrores = $row['IdErrores'];
+            $Sentencia = $row['Sentencia'];
+            $Controller = $row['Controller'];
+            $CreatedAt = $row['CreatedAt'];
+            $IdUser = $row['IdUser'];
+    
+            // Eliminar el menú
+            $error->eliminarError($IdErrores);
+    
+            $item = array(
+                'IdErrores' => $row['IdErrores'],
+                'Sentencia' => $row['Sentencia'],
+                'Controller' => $row['Controller'],
+                'CreatedAt' => $row['CreatedAt'],
+                'IdUser' => $row['IdUser']
+            );
+    
+            $this->printJSON($item);
+        } else {
+            $this->error('no se encontró');
+        }
+    }
+
+
     function insertarErrores($IdErrores, $Sentencia, $Controller, $CreatedAt, $IdUser)
     {
         $errores = new Errores(); // Crear una instancia de la clase Errores

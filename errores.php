@@ -14,6 +14,12 @@ class Errores extends db
         return $query;
     }
 
+    function eliminarError($IdErrores){
+        $query = $this->connect()->prepare('DELETE FROM errores WHERE IdErrores = :IdErrores');
+        $query->execute(['IdErrores' => $IdErrores]);
+        return $query;
+    }
+    
     function insertarErrores($IdErrores, $Sentencia, $Controller, $CreatedAt, $IdUser)
     {
         $query = $this->connect()->prepare('INSERT INTO errores (IdErrores, Sentencia, Controller, CreatedAt, IdUser) VALUES (:IdErrores, :Sentencia, :Controller, :CreatedAt, :IdUser)');

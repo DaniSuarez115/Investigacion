@@ -57,39 +57,7 @@ class ApiRoles {
             $this->error('No hay elementos');
         }
     }
-    function eliminarById($IdRol) {
-        $menu = new Menu(); // Crear una instancia de la clase Menu
     
-        $res = $menu->obtenerMenu($IdRol); // Obtener el menú por IdRol
-    
-        if ($res->rowCount() == 1) {
-            $row = $res->fetch();
-    
-            // Obtener los datos del menú
-            $IdRol = $row['IdRol'];
-            $NameRol = $row['NameMenu'];
-            $IdMenu= $row['IdMenu'];
-            $CreatedAt = $row['CreatedAt'];
-            $UpdatedAt = $row['UpdatedAt'];
-            $Enabled = $row['Enabled'];
-    
-            // Eliminar el menú
-            $menu->eliminarMenu($IdRol);
-    
-            $item = array(
-                'IdRol' => $row['IdRol'],
-                'NameRol' => $row['NameRol'],
-                'IdMenu' => $row['IdMenu'],
-                'CreatedAt' => $row['CreatedAt'],
-                'UpdatedAt' => $row['UpdatedAt'],
-                'Enabled' => $row['Enabled']
-            );
-    
-            $this->printJSON($item);
-        } else {
-            $this->error('chupapijas borrado');
-        }
-    }
 
     function insertarRol($IdRol, $NameRol, $IdMenu, $CreatedAt, $UpdatedAt, $Enabled)
     {
@@ -138,7 +106,39 @@ class ApiRoles {
         }
     }
 
-
+    function eliminarById($IdRol) {
+        $rol = new Roles(); // Crear una instancia de la clase rol
+    
+        $res = $rol->obtenerRol($IdRol); // Obtener el menú por IdRol
+    
+        if ($res->rowCount() == 1) {
+            $row = $res->fetch();
+    
+            // Obtener los datos del menú
+            $IdRol = $row['IdRol'];
+            $NameRol = $row['NameRol'];
+            $IdMenu = $row['IdMenu'];
+            $CreatedAt = $row['CreatedAt'];
+            $UpdatedAt = $row['UpdatedAt'];
+            $Enabled = $row['Enabled'];
+    
+            // Eliminar el menú
+            $rol->eliminarRol($IdRol);
+    
+            $item = array(
+                'IdRol' => $row['IdRol'],
+                'NameRol' => $row['NameRol'],
+                'IdMenu' => $row['IdMenu'],
+                'CreatedAt' => $row['CreatedAt'],
+                'UpdatedAt' => $row['UpdatedAt'],
+                'Enabled' => $row['Enabled']
+            );
+    
+            $this->printJSON($item);
+        } else {
+            $this->error('no se encontró');
+        }
+    }
 
 
     function error($mensaje){
